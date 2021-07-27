@@ -28,4 +28,17 @@ defmodule WatwitterWeb.TimelineLiveTest do
     assert has_element?(view, "#post-#{post1.id}")
     assert has_element?(view, "#post-#{post2.id}")
   end
+
+  test "shows posts when clicked", %{conn: conn} do
+    post = insert(:post)
+    {:ok, view, _html} = live(conn, "/")
+
+    view
+    |> element("#post-#{post.id} [data-role=\"select-post\"]", post.body)
+    |> render_click()
+
+    assert view
+           |> element("#show-post-#{post.id}")
+           |> has_element?()
+  end
 end
