@@ -48,14 +48,4 @@ defmodule WatwitterWeb.PostComponentTest do
     assert html =~ "data-role=\"reposts-count\""
     assert html =~ "333"
   end
-
-  test "renders reposts button" do
-    post = insert(:post, reposts_count: 333)
-
-    html = render_component(PostComponent, post: post)
-
-    assert html =~ "data-role=\"reposts-button\""
-    assert html =~ "data-role=\"reposts-count\""
-    assert html =~ "333"
-  end
 end
