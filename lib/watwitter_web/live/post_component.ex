@@ -1,8 +1,7 @@
 defmodule WatwitterWeb.PostComponent do
   use WatwitterWeb, :live_component
   alias WatwitterWeb.DateHelpers
-
-  alias WatwitterWeb.DateHelpers
+  alias WatwitterWeb.SVGHelpers
 
   def render(assigns) do
     ~L"""
@@ -32,7 +31,11 @@ defmodule WatwitterWeb.PostComponent do
         </div>
 
         <div class="post-actions">
-          <a class="post-action" href="#">
+          <a class="post-action" href="#" data-role="likes-button">
+            <%= SVGHelpers.liked_svg() %>
+            <span class="post-action-likes" data-role="likes-count">
+              <%= @post.likes_count %>
+            </span>
           </a>
         </div>
       </div>
