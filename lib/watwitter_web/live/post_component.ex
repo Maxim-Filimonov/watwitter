@@ -36,7 +36,9 @@ defmodule WatwitterWeb.PostComponent do
           </a>
           <a class="post-action" href="#">
             <%= SVGHelpers.repost_svg() %>
-            <span class="post-action-count"><%= @post.reposts_count %></span>
+            <span class="post-action-count" data-role="reposts-count">
+              <%= @post.reposts_count %>
+            </span>
           </a>
           <%= if current_user_liked?(@post, @current_user) do %>
             <a class="post-action post-liked" href="#" data-role="post-liked">
