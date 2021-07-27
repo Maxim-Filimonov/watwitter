@@ -13,15 +13,15 @@ defmodule WatwitterWeb.TimelineLiveTest do
     assert render(view) =~ "Home"
   end
 
-  test "current user can see their avatar", %{conn: conn, user: user} do
+  test "current user can see own avatar", %{conn: conn, user: user} do
     {:ok, view, _html} = live(conn, "/")
 
-    avatar = element(view, "img[src*=#{user.avatar_url}")
+    avatar = element(view, "img[src*=#{user.avatar_url}]")
 
     assert has_element?(avatar)
   end
 
-  test "user can see list of posts", %{conn: conn} do
+  test "renders a list of posts", %{conn: conn} do
     [post1, post2] = insert_pair(:post)
     {:ok, view, _html} = live(conn, "/")
 
