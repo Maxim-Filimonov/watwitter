@@ -3,6 +3,7 @@ defmodule WatwitterWeb.TimelineLive do
 
   alias Watwitter.{Accounts, Timeline}
   alias WatwitterWeb.PostComponent
+  alias WatwitterWeb.SVGHelpers
 
   def mount(_params, session, socket) do
     current_user = Accounts.get_user_by_session_token(session["user_token"])

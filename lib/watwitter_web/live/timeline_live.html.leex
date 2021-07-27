@@ -5,6 +5,14 @@
 
 <div class="body">
   <%= for post <- @posts do %>
-    <%= live_component @socket, PostComponent, post: post %>
+    <%= live_component @socket, PostComponent, post: post, current_user: @current_user %>
   <% end %>
 </div>
+
+<footer class="footer">
+  <div class="footer-items">
+    <%= live_redirect to: Routes.timeline_path(@socket, :index) do %>
+      <%= SVGHelpers.home_svg() %>
+    <% end %>
+  </div>
+</footer>
