@@ -41,4 +41,13 @@ defmodule WatwitterWeb.TimelineLiveTest do
            |> element("#show-post-#{post.id}")
            |> has_element?()
   end
+
+  test "user can visit highlighted post url", %{conn: conn} do
+    post = insert(:post)
+    {:ok, view, _html} = live(conn, Routes.timeline_path(conn, :index, post_id: post.id))
+
+    assert view
+           |> element("#show-post-#{post.id}")
+           |> has_element?()
+  end
 end

@@ -26,13 +26,16 @@ defmodule WatwitterWeb.PostComponent do
           </div>
         </div>
 
+
         <div
-          data-role="select-post"
-          class="post-body"
-          phx-click="select-post"
-          phx-value-id="<%= @post.id %>">
-          <%= @post.body %>
+          class="post-body">
+          <%= live_patch(
+                to: Routes.timeline_path(@socket, :index, post_id: @post.id),
+                data: [role: "select-post"]) do %>
+            <%= @post.body %>
+          <% end %>
         </div>
+
 
         <div class="post-actions">
           <a class="post-action" href="#">
