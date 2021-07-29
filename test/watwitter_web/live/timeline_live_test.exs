@@ -50,4 +50,28 @@ defmodule WatwitterWeb.TimelineLiveTest do
            |> element("#show-post-#{post.id}")
            |> has_element?()
   end
+
+  test "user can visit settings page", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    {:ok, conn} =
+      view
+      |> element("#user-avatar")
+      |> render_click()
+      |> follow_redirect(conn, Routes.user_settings_path(conn, :edit))
+
+    assert html_response(conn, 200) =~ "Settings"
+  end
+
+  test "user can compose a new tweet", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    {:ok, view, _html} =
+      view
+      |> element("#compose-tweet")
+      |> render_click()
+      |> follow_redirect(conn, Routes.compose_path(conn, :new))
+
+    assert view |> render() =~ "Compose Watweet"
+  end
 end
