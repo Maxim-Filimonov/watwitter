@@ -4,20 +4,19 @@
   <% end %>
   <h1 class="header-title">Compose Watweet</h1>
 </header>
-
 <div class="body">
   <div class="compose-wrapper">
     <img class="avatar" src="<%= @current_user.avatar_url %>">
-
-    <form class="compose-form">
-      <div class="compose-fields">
-        <div class="compose-box">
+    <%= f = form_for @changeset, "#", id: "new-post", class: "compose-form", phx_submit: "save" %>
+    <div class="compose-fields">
+      <div class="compose-box">
+        <%= textarea f, :body, placeholder: "Tweet away!" %>
+      </div>
+      <%= error_tag f, :body %>
+    </div>
+    <div class="compose-actions">
+      <button class="compose-btn">Post<button>
         </div>
-      </div>
-
-      <div class="compose-actions">
-        <button class="compose-btn">Post<button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
