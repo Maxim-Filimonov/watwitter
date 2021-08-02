@@ -29,4 +29,15 @@ defmodule WatwitterWeb.ComposeLiveTest do
 
     assert rendered =~ "can&apos;t be blank"
   end
+
+  test "user is notified of errors before form is submitted", %{conn: conn} do
+    {:ok, view, _html} = live(conn, Routes.compose_path(conn, :new))
+
+    rendered =
+      view
+      |> form("#new-post", post: %{body: nil})
+      |> render_change()
+
+    assert rendered =~ "can&apos;t be blank"
+  end
 end
