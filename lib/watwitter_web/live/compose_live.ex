@@ -4,6 +4,8 @@ defmodule WatwitterWeb.ComposeLive do
   alias Watwitter.Timeline
   alias Watwitter.Timeline.Post
   alias Watwitter.Accounts
+  alias Watwitter.Timeline
+  alias Watwitter.Timeline.Post
   alias WatwitterWeb.SVGHelpers
 
   def mount(_params, session, socket) do
