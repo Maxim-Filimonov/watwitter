@@ -6,6 +6,10 @@ defmodule WatwitterWeb.TimelineLive do
   alias WatwitterWeb.SVGHelpers
 
   def mount(_params, session, socket) do
+    if connected?(socket) do
+      Timeline.subscribe()
+    end
+
     current_user = Accounts.get_user_by_session_token(session["user_token"])
     posts = Timeline.list_posts()
 
@@ -13,7 +17,8 @@ defmodule WatwitterWeb.TimelineLive do
      assign(socket,
        posts: posts,
        current_user: current_user,
-       current_post: nil
+       current_post: nil,
+       new_posts_count: 0
      )}
   end
 
@@ -25,5 +30,9 @@ defmodule WatwitterWeb.TimelineLive do
 
   def handle_params(_, _, socket) do
     {:noreply, socket}
+  end
+
+  def handle_info({:post_created, _post}, socket) do
+    {:noreply, update(socket, :new_posts_count, &(&1 + 1))}
   end
 end
